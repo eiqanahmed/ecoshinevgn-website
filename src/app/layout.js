@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "ECOSHINE VAUGHAN",
   description: "Premium Cleaning Service",
-  // icons: { icon: "/favicon.ico" }, // optional, see below
+  icons: { icon: "/latestecoshinelogo.png" },
 };
 
 export default function RootLayout({ children }) {
