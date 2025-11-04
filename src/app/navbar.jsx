@@ -1,46 +1,78 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { useState } from "react"
+import { Menu, X } from "lucide-react"
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleMenu = () => setIsOpen(!isOpen)
+
+  const navLinks = [
+    { href: "/", label: "HOME" },
+    { href: "/about-us", label: "ABOUT US" },
+    { href: "/services", label: "SERVICES" },
+    { href: "/quote", label: "GET A QUOTE" },
+    { href: "/contact-us", label: "CONTACT US" },
+  ]
+
   return (
     <header className="bg-white shadow-sm">
       <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-between gap-8">
+          {/* Logo - Left side */}
+          <div className="flex items-center flex-shrink-0">
             <Image
               src="/latestecoshinelogo.png"
               alt="Ecoshine Vaughan Logo"
               width={128}
               height={128}
-              className="h-24 w-24"
+              className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24"
             />
           </div>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            <Link href="/" className="text-navy font-medium hover:text-brandRed">
-              HOME
-            </Link>
-            <Link href="/about-us" className="text-navy hover:text-brandRed">
-              ABOUT US
-            </Link>
-            {/* <Link href="#" className="text-gray-700 hover:text-[#0a0d3a]">
-              AREA WE SERVE
-            </Link> */}
-            <Link href="/services" className="text-navy hover:text-brandRed">
-              SERVICES
-            </Link>
-            <Link href="/quote" className="text-navy hover:text-brandRed">
-              GET A QUOTE
-            </Link>
-            <Link href="/contact-us" className="text-navy hover:text-brandRed">
-              CONTACT US
-            </Link>
+          {/* Desktop Navigation - Centered */}
+          <nav className="hidden md:flex items-center gap-8 flex-1 justify-center">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-navy font-medium hover:text-brandRed transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
-          <div className="w-32"></div>
+          {/* Mobile menu button - Right side */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden p-2 rounded-md hover:bg-gray-100 transition-colors ml-auto"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="h-6 w-6 text-navy" /> : <Menu className="h-6 w-6 text-navy" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <nav className="md:hidden mt-4 pb-4 border-t border-gray-200 pt-4">
+            <div className="flex flex-col gap-3">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-navy font-medium hover:text-brandRed transition-colors py-2 px-2 rounded hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
       </div>
     </header>
   )
