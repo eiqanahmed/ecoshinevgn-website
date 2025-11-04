@@ -16,6 +16,28 @@ export const metadata = {
   title: "ECOSHINE VAUGHAN",
   description: "Premium Cleaning Service",
   icons: { icon: "/latestecoshinelogo.png" },
+  openGraph: {
+    title: "ECOSHINE VAUGHAN",
+    description: "Professional cleaning and detailing in Vaughan.",
+    url: "https://ecoshinevaughan.ca",
+    siteName: "ECOSHINE VAUGHAN",
+    images: [
+      {
+        url: "/latestecoshinelogo.png", // must be in /public
+        width: 800,
+        height: 600,
+        alt: "ECOSHINE VAUGHAN Logo",
+      },
+    ],
+    locale: "en_CA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ECOSHINE VAUGHAN",
+    description: "Professional cleaning and detailing in Vaughan.",
+    images: ["/latestecoshinelogo.png"],
+  },
 };
 
 export default function RootLayout({ children }) {
